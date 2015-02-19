@@ -72,12 +72,12 @@ public class lexico extends compilador {
     	char c;
     	
     	if( punteroLinea == -1 ) {
-    		if( (linea = br.readLine()) == null ) {
+    		if( (linea = leerLinea()) == null ) {
     			return 0;
     		}
     		
     		while( linea.trim().length() <= 0 ) {
-    			if( (linea = br.readLine()) == null ) {
+    			if( (linea = leerLinea()) == null ) {
 	    			return 0;
 	    		}
     		}
@@ -87,6 +87,7 @@ public class lexico extends compilador {
     		tam 			= linea.length();
     	}
     	
+    	//System.out.println()
     	if( linea.charAt( punteroLinea ) == ' ' ) {
     		linea = linea.substring( punteroLinea, tam ).trim();
     		punteroLinea 	= 0;
@@ -98,29 +99,33 @@ public class lexico extends compilador {
     		switch( linea.charAt( punteroLinea ) ) {
     			case '>': case '<': case '!': case '=':
     				cadena += linea.charAt( punteroLinea++ );
-    				if( linea.charAt( punteroLinea + 1 ) == '=' ) {
+    				if( linea.charAt( punteroLinea ) == '=' ) {
     					cadena += linea.charAt( punteroLinea );
+    					punteroLinea++;
     				}
     				break;
     			case ' ':
     				while( linea.trim().length() <= 0 ) {
-    					if( (linea = br.readLine()) == null ) {
+    					if( (linea = leerLinea()) == null ) {
 			    			return 0;
 			    		}
     				}
     				break;
 	    		case '+': case '-': case '*': case '/': case '(': case ')':
 	    			cadena += linea.charAt( punteroLinea++ );
+	    			//System.out.println( punteroLinea );
+	    			//System.out.println( tam );
+	    			//System.out.println( "Hola1!" );
 	    			break;
     		}
-    		punteroLinea++;
     	} else {
     		do {
     			cadena += linea.charAt( punteroLinea++ );
-    		}while( punteroLinea < tam && !esSeparador( linea.charAt( punteroLinea ) ) )
+    		}while( punteroLinea < tam && !esSeparador( linea.charAt( punteroLinea ) ) );
     	}
     	
     	if( punteroLinea == tam ) {
+    		//System.out.println( "Hola!" );
     		punteroLinea = -1;
     	}
     	
@@ -144,6 +149,16 @@ public class lexico extends compilador {
     	
     	//Regresamos el substring
     	return analizaSimbolo( cadena );
+    }
+    
+    public String leerLinea( ) {
+    	String l = null;
+    	try {
+    		l = br.readLine();
+    	} catch (IOException ioe) {
+    		ioe.printStackTrace();
+    	}
+    	return l;
     }
     
     public boolean esSeparador( char c ) {

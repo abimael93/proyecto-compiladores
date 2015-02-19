@@ -19,7 +19,15 @@ public class compilador {
         //El cero indica el fin de archivo y la E el error
         while( sigSimbolo != lex.E && sigSimbolo != 0 ) {
         	sigSimbolo = lex.siguienteSimbolo();
+        	lex.imprimeEstado( sigSimbolo );
         }
+        
+        if( sigSimbolo == 0 ) {
+        	System.out.println("1");
+        } else {
+        	System.out.println("0");
+        }
+        
         /*
 		File archivo = new File("entrada.txt");
 		try{
