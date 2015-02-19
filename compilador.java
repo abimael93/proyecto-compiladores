@@ -10,13 +10,17 @@ public class compilador {
     
     
     public static void main(String[] args) {
-		int tamanioLinea, i, sigSimbolo = -1 ;
-		FileReader fr;
-		BufferedReader br;
-		String linea = "";
+		int sigSimbolo;
+        lexico lex = new lexico();
         
-        lexico lex= new lexico();
+        sigSimbolo = -1;
+        lex.abrir_archivo("entrada.txt");
         
+        //El cero indica el fin de archivo y la E el error
+        while( sigSimbolo != lex.E && sigSimbolo != 0 ) {
+        	sigSimbolo = lex.siguienteSimbolo();
+        }
+        /*
 		File archivo = new File("entrada.txt");
 		try{
 			//Código
@@ -49,8 +53,9 @@ public class compilador {
 			System.out.println("Error, no se encontró el archivo especificado!");
 		} catch (IOException ioe){
 			ioe.printStackTrace();
-		}
+		}*/
 		
 		//System.out.println("hola!");
+		lex.cerrar_archivo();
     }
 }

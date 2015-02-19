@@ -1,3 +1,4 @@
+import java.io.*;
 
 public class lexico extends compilador {
 
@@ -5,7 +6,7 @@ public class lexico extends compilador {
     	
     }
     
-	String Cadena 	= "";
+	String linea	= "";
 	int E			= 100;
 	int[][] tabla 	=
 		{
@@ -21,9 +22,33 @@ public class lexico extends compilador {
 			{E,E,E,E,6,E,E,E,10,E,E},
 			{E,E,E,E,E,E,E,E,10,E,E},
 		};
-	int inicioSim, finSim;
+	int punteroLinea = -1, tam;
+	File archivo;
+	FileReader fr;
+	BufferedReader br;
+	
+	public void abrir_archivo( String nombre_archivo ) {
+		File archivo = new File(nombre_archivo);
+		try {
+			fr = new FileReader (archivo);
+			br = new BufferedReader (fr);
+		} catch (FileNotFoundException fnfe) {
+			//fnfe.printStackTrace();
+			System.out.println("Error, no se encontró el archivo especificado!");
+		}
+	}
+	
+	public void cerrar_archivo( ) {
+		try {
+            if( null != fr ) {
+               fr.close();    
+            }
+    	} catch (Exception e2) {
+        	e2.printStackTrace();
+     	}
+	}
     		
-    public int recibeSimbolo( String cadena ) {
+    public int analizaSimbolo( String cadena ) {
     	int i, estado = 0, valor = 0;
     	char c;
     	//System.out.println("Ingresa una cadena\n");
@@ -42,29 +67,83 @@ public class lexico extends compilador {
     	//imprimeEstado( estado );
     }
     
-    public String siguienteSimbolo( String linea, int tam ) {
+    public int siguienteSimbolo() {
     	String cadena = "";
     	char c;
     	
-    	while( ( linea.charAt( finSim ) == ' ' ) && finSim < tam ) {
+    	if( punteroLinea == -1 ) {
+    		if( (linea = br.readLine()) == null ) {
+    			return 0;
+    		}
+    		
+    		while( linea.trim().length() <= 0 ) {
+    			if( (linea = br.readLine()) == null ) {
+	    			return 0;
+	    		}
+    		}
+    		
+    		punteroLinea 	= 0;
+    		linea			= linea.trim();
+    		tam 			= linea.length();
+    	}
+    	
+    	if( linea.charAt( punteroLinea ) == ' ' ) {
+    		linea = linea.substring( punteroLinea, tam ).trim();
+    		punteroLinea 	= 0;
+    		linea 			= linea.trim();
+    		tam				= linea.length();
+    	}
+    	
+    	if( esSeparador( linea.charAt( punteroLinea ) ) ) {
+    		switch( linea.charAt( punteroLinea ) ) {
+    			case '>': case '<': case '!': case '=':
+    				cadena += linea.charAt( punteroLinea++ );
+    				if( linea.charAt( punteroLinea + 1 ) == '=' ) {
+    					cadena += linea.charAt( punteroLinea );
+    				}
+    				break;
+    			case ' ':
+    				while( linea.trim().length() <= 0 ) {
+    					if( (linea = br.readLine()) == null ) {
+			    			return 0;
+			    		}
+    				}
+    				break;
+	    		case '+': case '-': case '*': case '/': case '(': case ')':
+	    			cadena += linea.charAt( punteroLinea++ );
+	    			break;
+    		}
+    		punteroLinea++;
+    	} else {
+    		do {
+    			cadena += linea.charAt( punteroLinea++ );
+    		}while( punteroLinea < tam && !esSeparador( linea.charAt( punteroLinea ) ) )
+    	}
+    	
+    	if( punteroLinea == tam ) {
+    		punteroLinea = -1;
+    	}
+    	
+    	/*
+    	while( ( linea.charAt(  ) == ' ' ) && finSim < tam ) {
     		finSim++;
     		inicioSim++;
     	}
     	
     	//System.out.println( "Entró3!" );
     	if( finSim < tam ) {
-    		if()
+    		//if()
     		while( ( finSim < tam && !esSeparador( linea.charAt( finSim ) ) )  ) {
 	    		c 		= linea.charAt( finSim );
 	    		cadena += c;
 	    		finSim++;
 	    	}
-    	}
+    	}*/
     	
-    	System.out.println("Entró!4: " + cadena );
+    	//System.out.println("Entró!4: " + cadena );
     	
     	//Regresamos el substring
-    	return cadena;
+    	return analizaSimbolo( cadena );
     }
     
     public boolean esSeparador( char c ) {
@@ -133,7 +212,7 @@ public class lexico extends compilador {
 	        case 22:
 	            System.out.println("Punto");//Final del Programa
 	            break;
-	        case E:
+	        case 100:
 	            System.out.println("Error");
 	            break;
     	}
