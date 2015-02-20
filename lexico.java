@@ -97,7 +97,7 @@ public class lexico extends compilador {
     		switch( linea.charAt( punteroLinea ) ) {
     			case '>': case '<': case '!': case '=':
     				cadena += linea.charAt( punteroLinea++ );
-    				if( linea.charAt( punteroLinea ) == '=' ) {
+    				if(  punteroLinea < tam && linea.charAt( punteroLinea ) == '=' ) {
     					cadena += linea.charAt( punteroLinea );
     					punteroLinea++;
     				}
@@ -174,6 +174,8 @@ public class lexico extends compilador {
     
     public void imprimeEstado( int estado ) {
 	    switch ( estado ) {
+	    	case 0://Fin de Archivo
+	    		break;
 	        case 1:
 	            System.out.println("Delimitador");
 	            break;
@@ -207,7 +209,7 @@ public class lexico extends compilador {
 	        case 22:
 	            System.out.println("Punto");//Final del Programa
 	            break;
-	        case 100:
+	        default:
 	            System.out.println("Error");
 	            break;
     	}

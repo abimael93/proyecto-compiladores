@@ -35,7 +35,7 @@ public class compilador {
  
         	} catch (Exception e) {
            		 e.printStackTrace();
-        		} 
+        		}
          try{
            if (null != fichero)
               fichero.close();
