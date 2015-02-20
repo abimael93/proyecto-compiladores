@@ -22,48 +22,27 @@ public class compilador {
         	lex.imprimeEstado( sigSimbolo );
         }
         
-        if( sigSimbolo == 0 ) {
-        	System.out.println("1");
-        } else {
-        	System.out.println("0");
-        }
         
-        /*
-		File archivo = new File("entrada.txt");
-		try{
-			//Código
-			fr = new FileReader (archivo);
-			br = new BufferedReader (fr);
-			while( (linea = br.readLine() ) != null && sigSimbolo != lex.E ) {
-				//System.out.println("Entró!");
-				tamanioLinea = linea.length();
-				System.out.println("Tamaño de la línea: " + tamanioLinea );
-				sigSimbolo = -1;
-				for( i = 0, lex.inicioSim = lex.finSim = 0 ; lex.finSim < tamanioLinea && sigSimbolo != lex.E && i < 2; lex.inicioSim = lex.finSim , i++) {
-					//System.out.println("Entró1!");
-					sigSimbolo = lex.recibeSimbolo( lex.siguienteSimbolo( linea , tamanioLinea ) );
-					System.out.println("Puntero: " + lex.finSim );
-					//System.out.println("Entró2!");
-					System.out.print( sigSimbolo + ": " );
-					lex.imprimeEstado( sigSimbolo );
-					//break;
-				}
-				break;
-			}
-			if(sigSimbolo != lex.E ) {
-				System.out.println("1");
-			} else {
-				System.out.println("0");
-			}
-			
-		} catch (FileNotFoundException fnfe){
-			//fnfe.printStackTrace();
-			System.out.println("Error, no se encontró el archivo especificado!");
-		} catch (IOException ioe){
-			ioe.printStackTrace();
-		}*/
-		
-		//System.out.println("hola!");
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+     	try {
+         	fichero = new FileWriter("salida.txt",true);
+         	pw = new PrintWriter(fichero);
+ 			if( sigSimbolo == 0 ) 
+ 				pw.println("1");
+	         else
+	        	pw.println("0");
+ 
+        	} catch (Exception e) {
+           		 e.printStackTrace();
+        		} 
+         try{
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        
 		lex.cerrar_archivo();
     }
 }

@@ -33,7 +33,6 @@ public class lexico extends compilador {
 			fr = new FileReader (archivo);
 			br = new BufferedReader (fr);
 		} catch (FileNotFoundException fnfe) {
-			//fnfe.printStackTrace();
 			System.out.println("Error, no se encontró el archivo especificado!");
 		}
 	}
@@ -43,16 +42,15 @@ public class lexico extends compilador {
             if( null != fr ) {
                fr.close();    
             }
-    	} catch (Exception e2) {
-        	e2.printStackTrace();
+    	} catch (Exception e) {
+        	e.printStackTrace();
      	}
 	}
     		
     public int analizaSimbolo( String cadena ) {
     	int i, estado = 0, valor = 0;
     	char c;
-    	//System.out.println("Ingresa una cadena\n");
-    	//Cadena=Leer.nextLine();
+    
     	estado = analizaReservada( cadena );
     	
     	if( estado < 1 ) {
@@ -64,7 +62,7 @@ public class lexico extends compilador {
     	}
     	
     	return estado;
-    	//imprimeEstado( estado );
+   
     }
     
     public int siguienteSimbolo() {
@@ -87,7 +85,7 @@ public class lexico extends compilador {
     		tam 			= linea.length();
     	}
     	
-    	//System.out.println()
+    
     	if( linea.charAt( punteroLinea ) == ' ' ) {
     		linea = linea.substring( punteroLinea, tam ).trim();
     		punteroLinea 	= 0;
@@ -113,9 +111,7 @@ public class lexico extends compilador {
     				break;
 	    		case '+': case '-': case '*': case '/': case '(': case ')':
 	    			cadena += linea.charAt( punteroLinea++ );
-	    			//System.out.println( punteroLinea );
-	    			//System.out.println( tam );
-	    			//System.out.println( "Hola1!" );
+	    		
 	    			break;
     		}
     	} else {
@@ -125,40 +121,24 @@ public class lexico extends compilador {
     	}
     	
     	if( punteroLinea == tam ) {
-    		//System.out.println( "Hola!" );
+    
     		punteroLinea = -1;
     	}
     	
-    	/*
-    	while( ( linea.charAt(  ) == ' ' ) && finSim < tam ) {
-    		finSim++;
-    		inicioSim++;
-    	}
-    	
-    	//System.out.println( "Entró3!" );
-    	if( finSim < tam ) {
-    		//if()
-    		while( ( finSim < tam && !esSeparador( linea.charAt( finSim ) ) )  ) {
-	    		c 		= linea.charAt( finSim );
-	    		cadena += c;
-	    		finSim++;
-	    	}
-    	}*/
-    	
-    	//System.out.println("Entró!4: " + cadena );
+    
     	
     	//Regresamos el substring
     	return analizaSimbolo( cadena );
     }
     
     public String leerLinea( ) {
-    	String l = null;
+    	
     	try {
-    		l = br.readLine();
+    	return br.readLine();
     	} catch (IOException ioe) {
     		ioe.printStackTrace();
     	}
-    	return l;
+    	return null;
     }
     
     public boolean esSeparador( char c ) {
