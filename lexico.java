@@ -10,17 +10,20 @@ public class lexico extends compilador {
 	int E			= 100;
 	int[][] tabla 	=
 		{
-			{E,1,2,3,5,5,E,7,8,E,9},
-			{E,E,E,E,E,E,E,E,E,E,E},
-			{E,E,E,E,E,E,E,E,E,E,E},
-			{E,E,E,E,4,E,E,E,E,E,E},
-			{E,E,E,E,E,E,E,E,E,E,E},
-			{E,E,E,E,6,E,E,E,E,E,E},
-			{E,E,E,E,E,E,E,E,E,E,E},
-			{E,E,E,E,E,E,E,7,7,E,E},
-			{E,E,E,E,E,E,E,E,8,9,E},
-			{E,E,E,E,6,E,E,E,10,E,E},
-			{E,E,E,E,E,E,E,E,10,E,E},
+	/*Estados*/
+	 			{E,1,2,3,5,5,E,7,8,E,9,11,12},//0
+				{E,E,E,E,E,E,E,E,E,E,E,E,E},//1
+				{E,E,E,E,E,E,E,E,E,E,E,E,E},//2
+				{E,E,E,E,4,E,E,E,E,E,E,E,E},//3
+				{E,E,E,E,E,E,E,E,E,E,E,E,E},//4
+				{E,E,E,E,6,E,E,E,E,E,E,E,E},//5
+				{E,E,E,E,E,E,E,E,E,E,E,E,E},//6
+				{E,E,E,E,E,E,E,7,7,E,E,E,E},//7
+				{E,E,E,E,E,E,E,E,8,9,E,E,E},//8
+				{E,E,E,E,6,E,E,E,10,E,E,E,E},//9
+				{E,E,E,E,E,E,E,E,10,E,E,E,E},//10
+				{E,E,E,E,E,E,E,E,E,E,E,E,E},//11
+				{E,E,E,E,E,E,E,E,E,E,E,E,E},//12
 		};
 	int punteroLinea = -1, tam;
 	File archivo;
@@ -200,6 +203,12 @@ public class lexico extends compilador {
 	        case 10:
 	            System.out.println("Real");
 	            break;
+	        case 11:
+	            System.out.println("Parentesis-Izq");
+	            break;
+	        case 12:
+	            System.out.println("Parentesis-Der");
+	            break;
 	        case 20:
 	            System.out.println("Operador Lógico");
 	            break;
@@ -247,6 +256,12 @@ public class lexico extends compilador {
     			break;
     		case '!':
     			valor=10;
+    			break;
+    		case '(':
+    			valor=11;
+    			break;
+    		case ')':
+    			valor=12;
     			break;
     	}
     	return valor;

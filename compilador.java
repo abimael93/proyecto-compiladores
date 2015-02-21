@@ -22,7 +22,7 @@ public class compilador {
         	lex.imprimeEstado( sigSimbolo );
         }
         
-        
+        //Escritura de la salida
         FileWriter fichero = null;
         PrintWriter pw = null;
      	try {
