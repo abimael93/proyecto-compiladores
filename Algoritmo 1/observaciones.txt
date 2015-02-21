@@ -1,0 +1,5 @@
+Prueba entrada0 correcta
+Prueba entrada1 incorrecta
+Prueba entrada2 incorrecta
+Prueba entrada3 incorrecta
+Prueba entrada4 incorrecta
