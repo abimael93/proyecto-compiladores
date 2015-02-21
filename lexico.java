@@ -148,7 +148,7 @@ public class lexico extends compilador {
     	switch( c ) {
     		case '>': case '<': case '!': case '=': case ' ':
     		case '+': case '-': case '*': case '/': case '(':
-    		case ')':
+    		case ')': case '?': case '¿': case '{': case '}':
     			return true;
     	}
     	return false;

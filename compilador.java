@@ -10,25 +10,26 @@ public class compilador {
     
     
     public static void main(String[] args) {
-		int sigSimbolo;
+		int sigSimbolo, i;
         lexico lex = new lexico();
         
-        sigSimbolo = -1;
+        sigSimbolo = i = -1;
         lex.abrir_archivo("entrada.txt");
         
         //El cero indica el fin de archivo y la E el error
         while( sigSimbolo != lex.E && sigSimbolo != 0 ) {
         	sigSimbolo = lex.siguienteSimbolo();
         	lex.imprimeEstado( sigSimbolo );
+        	i++;
         }
         
         //Escritura de la salida
         FileWriter fichero = null;
         PrintWriter pw = null;
      	try {
-         	fichero = new FileWriter("salida.txt",true);
+         	fichero = new FileWriter("salida.txt");
          	pw = new PrintWriter(fichero);
- 			if( sigSimbolo == 0 ) 
+ 			if( sigSimbolo == 0 && i != 0) 
  				pw.println("1");
 	         else
 	        	pw.println("0");
