@@ -29,7 +29,7 @@ public class compilador {
      	try {
          	fichero = new FileWriter("salida.txt");
          	pw = new PrintWriter(fichero);
- 			if( sigSimbolo == 0 && i != 0) 
+ 			if( sigSimbolo == 0 ) 
  				pw.println("1");
 	         else
 	        	pw.println("0");

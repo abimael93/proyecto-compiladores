@@ -89,7 +89,7 @@ public class lexico extends compilador {
     	}
     	
     
-    	if( linea.charAt( punteroLinea ) == ' ' ) {
+    	if( linea.charAt( punteroLinea ) == ' ' || linea.charAt( punteroLinea ) == '\t' ) {
     		linea = linea.substring( punteroLinea, tam ).trim();
     		punteroLinea 	= 0;
     		linea 			= linea.trim();
@@ -112,10 +112,16 @@ public class lexico extends compilador {
 			    		}
     				}
     				break;
-	    		case '+': case '-': case '*': case '/': case '(': case ')':
+	    		case '+': case '-': case '*': case '/': case '(': case ')': case ',': case ';':
 	    			cadena += linea.charAt( punteroLinea++ );
-	    		
 	    			break;
+	    		case ':':
+	    			cadena += linea.charAt( punteroLinea++ );
+	    			if(  punteroLinea < tam && linea.charAt( punteroLinea ) == '=' ) {
+    					cadena += linea.charAt( punteroLinea );
+    					punteroLinea++;
+    				}
+    				break;
     		}
     	} else {
     		do {
@@ -128,9 +134,9 @@ public class lexico extends compilador {
     		punteroLinea = -1;
     	}
     	
-    
     	
     	//Regresamos el substring
+    	System.out.println( cadena );
     	return analizaSimbolo( cadena );
     }
     
@@ -148,7 +154,7 @@ public class lexico extends compilador {
     	switch( c ) {
     		case '>': case '<': case '!': case '=': case ' ':
     		case '+': case '-': case '*': case '/': case '(':
-    		case ')': case '?': case '¿': case '{': case '}':
+    		case ')': case ',': case ';': case ':': case '\t':
     			return true;
     	}
     	return false;
