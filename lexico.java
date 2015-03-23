@@ -26,6 +26,8 @@ public class lexico extends compilador {
 				{E,E,E,E,E,E,E,E,E,E,E,E,E},//12
 		};
 	int punteroLinea = -1, tam;
+    int valorSimbolo;
+    String simbolo;
 	File archivo;
 	FileReader fr;
 	BufferedReader br;
@@ -68,7 +70,7 @@ public class lexico extends compilador {
    
     }
     
-    public int siguienteSimbolo() {
+    public int sigSimbolo() {
     	String cadena = "";
     	char c;
     	
@@ -136,8 +138,8 @@ public class lexico extends compilador {
     	
     	
     	//Regresamos el substring
-    	System.out.println( cadena );
-    	return analizaSimbolo( cadena );
+    	simbolo=cadena;
+    	return valorSimbolo = analizaSimbolo( cadena );
     }
     
     public String leerLinea( ) {
@@ -162,19 +164,79 @@ public class lexico extends compilador {
     
     public int analizaReservada(String palabra) {
     	int valor=0;
+
     	switch(palabra)
     	{
     		case "and":case "or":case "not":
     			valor=20;
     			break;
-    		case "if": case "then":case "while":case "else":case "do":case "for":case "begin":case "end":
-    		case "writeln":case "readln":case "var":case "program":case "char":case "integer":case "byte":
-    		case "Real":case "Boolean":case "String": case "word":case "longint":case "shortint":
-    			valor=21;
+    		case "if":
+                valor=100;
+                break;
+            case "then":
+                valor=101;
+                break;
+            case "while":
+                valor=102;
+                break;
+            case "else":
+                valor=103;
+                break;
+            case "do":
+                valor=104;
+                break;
+            case "for":
+                valor=105;
+                break;
+            case "begin":
+                valor=106;
+                break;
+            case "end":
+                valor=107;
+                break;
+    		case "writeln":
+                valor=108;
+                break;
+            case "readln":
+                valor=109;
+                break;
+            case "var":
+                valor=110;
+                break;
+            case "program":
+                valor=111;
+                break;
+            case "char":
+                valor=112;
+                break;
+            case "integer":
+                valor=113;
+                break;
+            case "byte":
+                valor=114;
+                break;
+    		case "real":
+                valor=115;
+                break;
+            case "boolean":
+                valor=116;
+                break;
+            case "string":
+                valor=117;
+                break;
+            case "word":
+                valor=118;
+                break;
+            case "longint":
+                valor=119;
+                break;
+            case "shortint":
+    			valor=120;
     			break;
     		case ".":
     			valor=22;
     			break;
+
     			
     	}
     	return valor;
@@ -218,7 +280,7 @@ public class lexico extends compilador {
 	        case 20:
 	            System.out.println("Operador Lógico");
 	            break;
-	        case 21:
+	        case 21://del 100 al 120
 	            System.out.println("Palabra Reservada");
 	            break;
 	        case 22:
