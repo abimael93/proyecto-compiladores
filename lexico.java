@@ -233,6 +233,8 @@ public class lexico extends compilador {
             case "shortint":
     			valor=120;
     			break;
+            case "end.":
+                valor=121;
     		case ".":
     			valor=22;
     			break;
