@@ -115,6 +115,7 @@ public class lexico extends compilador {
     				}
     				break;
 	    		case '+': case '-': case '*': case '/': case '(': case ')': case ',': case ';':
+                case '\'':
 	    			cadena += linea.charAt( punteroLinea++ );
 	    			break;
 	    		case ':':
@@ -157,6 +158,7 @@ public class lexico extends compilador {
     		case '>': case '<': case '!': case '=': case ' ':
     		case '+': case '-': case '*': case '/': case '(':
     		case ')': case ',': case ';': case ':': case '\t':
+            case '\'':
     			return true;
     	}
     	return false;
@@ -237,9 +239,7 @@ public class lexico extends compilador {
                 valor=121;
     		case ".":
     			valor=22;
-    			break;
-
-    			
+    			break;    			
     	}
     	return valor;
     	

@@ -13,13 +13,6 @@ readln(dx,dwew,weew,dwed3);
 readln(dx,dwew,weew,dwed3);
 readln(dx,dwew,weew,dwed3);
 readln(dx,dwew,weew,dwed3);
-writeln();
-writeln();
-writeln();
-if x+y+z*3*2 then
-writeln();
-writeln();
-writeln();
-if x+y+z*3*2 then
-
+writeln('3');
+writeln('hola');
 end.

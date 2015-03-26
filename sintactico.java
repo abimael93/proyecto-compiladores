@@ -68,17 +68,20 @@ lexico lex = new lexico();
 		switch(lex.valorSimbolo)
 		{
 			case 7:
-			Sentencia_Asignacion();
-			break;
+				Sentencia_Asignacion();
+				break;
 			case 100:
-			Sentencia_if();
-			break;
+				Sentencia_if();
+				break;
 			case 108:
-			Sentencia_writeln();
-			break;
+				Sentencia_writeln();
+				break;
 			case 109:
-			Sentencia_readln();
-			break;
+				Sentencia_readln();
+				break;
+			case 102:
+				Sentencia_while();
+				break;
 			default:
 			break;
 		}
@@ -124,12 +127,21 @@ lexico lex = new lexico();
 		if(lex.valorSimbolo==108)
 		{
 			lex.sigSimbolo();
-			if(lex.valorSimbolo==11)
-			{
+			//Comprobamos el paréntesis izq
+			if( lex.valorSimbolo == 11 ) {
 				lex.sigSimbolo();
-				Expresion();
+				//Expresion();
+				System.out.println("hola");
+				while( lex.valorSimbolo != 0 || lex.simbolo != "'") {
+					System.out.println(lex.simbolo);
+					lex.sigSimbolo();
+				}
+				comprueba("'");
 				comprueba(")");
 				comprueba(";");
+			}
+			else {
+				Error();
 			}
 		}
 
@@ -143,7 +155,12 @@ lexico lex = new lexico();
 			lex.sigSimbolo();
 			Condicion();
 			comprueba("then");
-			Sentencia();
+			comprueba("begin");
+			while( lex.valorSimbolo != 107 ) {
+				Sentencia();
+			}
+			comprueba("end");
+			comprueba(";");
 			Else();
 		}
 	}
@@ -157,7 +174,7 @@ lexico lex = new lexico();
 			Error();
 		}
 
-		//Operador Aritmético o relacional
+		//Operador Aritmético o Relacional
 		while( lex.valorSimbolo == 2 || lex.valorSimbolo == 5 || lex.valorSimbolo == 6 ) {
 			lex.sigSimbolo();
 			//Debe haber a continuacion un id, un int o un float
@@ -170,14 +187,34 @@ lexico lex = new lexico();
 		}
 	}
 	
+	/*	
+	**	Función que evalúa el opcional else después de un if
+	*/	
 	public void Else() 
 	{	
 		if( lex.valorSimbolo == 103 ) {
 			System.out.println("Else");
 			lex.sigSimbolo();
+			comprueba("begin");
+			while( lex.valorSimbolo != 107 ) {
+				Sentencia();
+			}
+			comprueba("end");
+			comprueba(";");
+		}
+	}
+
+	public void Sentencia_while() {
+		lex.sigSimbolo();
+		Condicion();
+		comprueba("do");
+		comprueba("begin");
+		//Comprobamos que no haya llegado al end
+		while( lex.valorSimbolo != 107 ){
 			Sentencia();
 		}
-
+		comprueba("end");
+		comprueba(";");
 	}
 
 	//Funcion para los tipos de expresiones falta evaluar los operadores de asignacion
