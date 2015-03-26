@@ -13,6 +13,6 @@ readln(dx,dwew,weew,dwed3);
 readln(dx,dwew,weew,dwed3);
 readln(dx,dwew,weew,dwed3);
 readln(dx,dwew,weew,dwed3);
-writeln('3');
-writeln('hola');
+writeln('3+id+5*4');
+
 end.

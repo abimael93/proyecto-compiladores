@@ -127,21 +127,20 @@ lexico lex = new lexico();
 		if(lex.valorSimbolo==108)
 		{
 			lex.sigSimbolo();
-			//Comprobamos el paréntesis izq
-			if( lex.valorSimbolo == 11 ) {
+			if(lex.valorSimbolo==11)
+			{
 				lex.sigSimbolo();
-				//Expresion();
-				System.out.println("hola");
-				while( lex.valorSimbolo != 0 || lex.simbolo != "'") {
-					System.out.println(lex.simbolo);
+				comprueba("\'");
+				Expresion();
+				comprueba("\'");
+				if(lex.valorSimbolo==1)
+				{
 					lex.sigSimbolo();
+					Expresion();
 				}
-				comprueba("'");
+				
 				comprueba(")");
 				comprueba(";");
-			}
-			else {
-				Error();
 			}
 		}
 
