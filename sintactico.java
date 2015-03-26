@@ -31,11 +31,10 @@ lexico lex = new lexico();
 		//fin Deckaracion de variables (Opcional)
 
 		comprueba("begin");
-		if(!lex.simbolo.equals("end."))
-			{
-					Cuerpo();
-			}
-
+		while(!lex.simbolo.equals("end."))
+		{
+			Cuerpo();
+		}
 		comprueba("end.");
 		
 	}
@@ -67,12 +66,12 @@ lexico lex = new lexico();
 	public void Cuerpo(){
 
 		Sentencia();
-		if(lex.valorSimbolo==1)
+		/*if(lex.valorSimbolo==1)
 		{
 			lex.sigSimbolo();
 			Cuerpo();
 		}
-	
+		*/
 	}
 	
 
@@ -84,19 +83,15 @@ lexico lex = new lexico();
 			case 7:
 			Sentencia_Asignacion();
 			break;
-
 			case 100:
 			Sentencia_if();
 			break;
-
 			case 108:
 			Sentencia_writeln();
 			break;
-
 			case 109:
 			Sentencia_readln();
 			break;
-
 			default:
 			break;
 		}
@@ -158,17 +153,38 @@ lexico lex = new lexico();
 		if(lex.valorSimbolo==100)
 		{
 			lex.sigSimbolo();
-			Expresion();
+			Condicion();
 			comprueba("then");
 			Sentencia();
 			Else();
 		}
 	}
 
+	public void Condicion() {
+		//Debe haber a continuacion un id, un int o un float
+		if( lex.valorSimbolo == 7 || lex.valorSimbolo == 8 || lex.valorSimbolo == 10 ) {
+			lex.sigSimbolo();
+		}
+		else {
+			Error();
+		}
+
+		//Operador Aritmético o relacional
+		while( lex.valorSimbolo == 2 || lex.valorSimbolo == 5 || lex.valorSimbolo == 6 ) {
+			lex.sigSimbolo();
+			//Debe haber a continuacion un id, un int o un float
+			if( lex.valorSimbolo == 7 || lex.valorSimbolo == 8 || lex.valorSimbolo == 10 ) {
+				lex.sigSimbolo();
+			}
+			else {
+				Error();
+			}
+		}
+	}
 	
 	public void Else() 
 	{	
-		if(lex.valorSimbolo==103){
+		if( lex.valorSimbolo == 103 ) {
 			System.out.println("Else");
 			lex.sigSimbolo();
 			Sentencia();
