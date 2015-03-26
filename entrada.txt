@@ -1,0 +1,25 @@
+program Pruebas;
+
+var
+a:integer;
+x,y,z:real;
+GG:integer;
+
+begin
+
+
+readln(dx,dwew,weew,dwed3);
+readln(dx,dwew,weew,dwed3);
+readln(dx,dwew,weew,dwed3);
+readln(dx,dwew,weew,dwed3);
+readln(dx,dwew,weew,dwed3);
+writeln();
+writeln();
+writeln();
+if x+y+z*3*2 then
+writeln();
+writeln();
+writeln();
+if x+y+z*3*2 then
+
+end.
