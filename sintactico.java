@@ -31,9 +31,10 @@ lexico lex = new lexico();
 		//fin Deckaracion de variables (Opcional)
 
 		comprueba("begin");
-		if(!lex.simbolo.equals("end."))
+		while(!lex.simbolo.equals("end."))
 			{
-					Cuerpo();
+					Sentencia();
+
 			}
 
 		comprueba("end.");
@@ -63,17 +64,6 @@ lexico lex = new lexico();
 		}//fin declaracion variables
 	}
 
-
-	public void Cuerpo(){
-
-		Sentencia();
-		if(lex.valorSimbolo==1)
-		{
-			lex.sigSimbolo();
-			Cuerpo();
-		}
-	
-	}
 	
 
 	public void Sentencia()
@@ -109,6 +99,7 @@ lexico lex = new lexico();
 			lex.sigSimbolo();
 			comprueba(":=");
 			Expresion();
+			comprueba(";");
 		}
 	}
 	
@@ -121,7 +112,7 @@ lexico lex = new lexico();
 				lex.sigSimbolo();
 				Variables();
 				comprueba(")");
-
+				comprueba(";");
 			}
 		}
 	}
@@ -146,7 +137,7 @@ lexico lex = new lexico();
 				lex.sigSimbolo();
 				Expresion();
 				comprueba(")");
-
+				comprueba(";");
 			}
 		}
 
