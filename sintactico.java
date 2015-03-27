@@ -70,7 +70,7 @@ lexico lex = new lexico();
 			case 7:
 				Sentencia_Asignacion();
 				break;
-			case 100:
+			case 99:
 				Sentencia_if();
 				break;
 			case 108:
@@ -149,7 +149,7 @@ lexico lex = new lexico();
 	
 	public void Sentencia_if()
 	{
-		if(lex.valorSimbolo==100)
+		if(lex.valorSimbolo==99)
 		{
 			lex.sigSimbolo();
 			Condicion();
@@ -165,6 +165,10 @@ lexico lex = new lexico();
 	}
 
 	public void Condicion() {
+		//Puede haber un not
+		if( lex.valorSimbolo == 130 ) {
+			lex.sigSimbolo();
+		}
 		//Debe haber a continuacion un id, un int o un float
 		if( lex.valorSimbolo == 7 || lex.valorSimbolo == 8 || lex.valorSimbolo == 10 ) {
 			lex.sigSimbolo();
@@ -172,10 +176,14 @@ lexico lex = new lexico();
 		else {
 			Error();
 		}
-
 		//Operador Aritmético o Relacional
-		while( lex.valorSimbolo == 2 || lex.valorSimbolo == 5 || lex.valorSimbolo == 6 ) {
+		while( lex.valorSimbolo == 2 || lex.valorSimbolo == 5 || lex.valorSimbolo == 6 ||
+			   lex.valorSimbolo == 20 ) {
 			lex.sigSimbolo();
+			//Puede haber un not
+			if( lex.valorSimbolo == 130 ) {
+				lex.sigSimbolo();
+			}
 			//Debe haber a continuacion un id, un int o un float
 			if( lex.valorSimbolo == 7 || lex.valorSimbolo == 8 || lex.valorSimbolo == 10 ) {
 				lex.sigSimbolo();

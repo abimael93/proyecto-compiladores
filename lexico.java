@@ -55,7 +55,6 @@ public class lexico extends compilador {
     public int analizaSimbolo( String cadena ) {
     	int i, estado = 0, valor = 0;
     	char c;
-    
     	estado = analizaReservada( cadena );
     	
     	if( estado < 1 ) {
@@ -166,14 +165,17 @@ public class lexico extends compilador {
     
     public int analizaReservada(String palabra) {
     	int valor=0;
-
+        
     	switch(palabra)
     	{
-    		case "and":case "or":case "not":
+    		case "and":case "or":
     			valor=20;
     			break;
+            case "not":
+                valor=130;
+                break;
     		case "if":
-                valor=100;
+                valor=99;
                 break;
             case "then":
                 valor=101;

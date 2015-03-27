@@ -7,12 +7,10 @@ GG:integer;
 
 begin
 
-
-readln(dx,dwew,weew,dwed3);
-readln(dx,dwew,weew,dwed3);
-readln(dx,dwew,weew,dwed3);
-readln(dx,dwew,weew,dwed3);
-readln(dx,dwew,weew,dwed3);
-writeln('3+id+5*4');
-
+    if not  z and x or y or not e then 
+        begin
+        end;
+    while not x do 
+    begin
+    end;
 end.
